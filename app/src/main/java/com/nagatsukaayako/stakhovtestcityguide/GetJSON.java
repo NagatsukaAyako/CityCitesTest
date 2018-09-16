@@ -17,10 +17,10 @@ import java.net.URL;
 import java.util.ArrayList;
 
 class GetJSON extends AsyncTask<String,String,String>{
-//    private onGetJSONSuccess mOnSuccess;
-//    public void setOnSucessListener(onGetJSONSuccess onSuccessListener){
-//        mOnSuccess = onSuccessListener;
-//    }
+    public NewsAdapter mAdapter;
+    public GetJSON(NewsAdapter adapter){
+        mAdapter = adapter;
+    }
     @Override
     protected String doInBackground(String... strings) {
         HttpURLConnection urlConnection = null;
@@ -72,7 +72,7 @@ class GetJSON extends AsyncTask<String,String,String>{
                         for (int i = 0; i < news.length(); i++) {
                             newsArrayList.add(new News((JSONObject) news.get(i)));
                         }
-                        Log.d("City Cites", newsArrayList.get(newsArrayList.size()-1).getName());
+                        mAdapter.setData(newsArrayList);
                     }
                 }
                 catch (JSONException e){
