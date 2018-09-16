@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Stakhov Test City Guide</string>
     <string name="title_activity_launch">Stakhov Test City Guide</string>
+    <string name="title_activity_main">Подробно</string>
 </resources>

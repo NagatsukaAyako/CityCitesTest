@@ -21,7 +21,7 @@ public class LaunchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         LinearLayout linearLayout = new LinearLayout(this);
         linearLayout.setOrientation(LinearLayout.VERTICAL);
-        FrameLayout mainFrame = new FrameLayout(this);
+        final FrameLayout mainFrame = new FrameLayout(this);
         mainFrame.setId(View.generateViewId());
         getSupportFragmentManager().beginTransaction().replace(mainFrame.getId(), new NewsFragment()).commit();
         BottomNavigationView navigation = new BottomNavigationView(this);
@@ -29,6 +29,7 @@ public class LaunchActivity extends AppCompatActivity {
         navMenu.add("Новости").setIcon(R.drawable.ic_news).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
+                getSupportFragmentManager().beginTransaction().replace(mainFrame.getId(), new NewsFragment()).commit();
                 return false;
             }
         });
@@ -41,13 +42,12 @@ public class LaunchActivity extends AppCompatActivity {
         navMenu.add("О программе").setIcon(R.drawable.ic_info).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
+                getSupportFragmentManager().beginTransaction().replace(mainFrame.getId(), new AboutFragment()).commit();
                 return false;
             }
         });
         linearLayout.addView(mainFrame, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0, 1));
         linearLayout.addView(navigation, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
         setContentView(linearLayout);
-
     }
-
 }

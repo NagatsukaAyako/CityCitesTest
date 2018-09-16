@@ -1,7 +1,9 @@
 package com.nagatsukaayako.stakhovtestcityguide;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -32,7 +34,9 @@ public class NewsFragment extends Fragment {
             mListener = new OnListFragmentInteractionListener(){
                 @Override
                 public void onListFragmentInteraction(News item) {
-
+                    Intent intent = new Intent(getActivity(), NewsDetailActivity.class);
+                    intent.putExtra("news", item);
+                    getActivity().startActivity(intent);
                 }
             };
     }
@@ -46,4 +50,5 @@ public class NewsFragment extends Fragment {
     public interface OnListFragmentInteractionListener {
         void onListFragmentInteraction(News item);
     }
+
 }

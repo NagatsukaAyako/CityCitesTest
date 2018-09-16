@@ -16,8 +16,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-class GetJSON extends AsyncTask<String,String,String>{
-    public NewsAdapter mAdapter;
+public class GetJSON extends AsyncTask<String,String,String>{
+    private NewsAdapter mAdapter;
     public GetJSON(NewsAdapter adapter){
         mAdapter = adapter;
     }
@@ -72,6 +72,7 @@ class GetJSON extends AsyncTask<String,String,String>{
                         for (int i = 0; i < news.length(); i++) {
                             newsArrayList.add(new News((JSONObject) news.get(i)));
                         }
+                        News.sortNews(newsArrayList);
                         mAdapter.setData(newsArrayList);
                     }
                 }
