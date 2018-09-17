@@ -16,7 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class LaunchActivity extends AppCompatActivity {
-
+    NewsFragment mainFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,13 +25,14 @@ public class LaunchActivity extends AppCompatActivity {
         linearLayout.setOrientation(LinearLayout.VERTICAL);
         final FrameLayout mainFrame = new FrameLayout(this);
         mainFrame.setId(View.generateViewId());
-        getSupportFragmentManager().beginTransaction().replace(mainFrame.getId(), new NewsFragment()).commit();
+        mainFragment = new NewsFragment();
+        getSupportFragmentManager().beginTransaction().replace(mainFrame.getId(), mainFragment).commit();
         BottomNavigationView navigation = new BottomNavigationView(this);
         Menu navMenu = navigation.getMenu();
         navMenu.add("Новости").setIcon(R.drawable.ic_news).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                getSupportFragmentManager().beginTransaction().replace(mainFrame.getId(), new NewsFragment()).commit();
+                getSupportFragmentManager().beginTransaction().replace(mainFrame.getId(), mainFragment).commit();
                 return false;
             }
         });
@@ -56,6 +57,11 @@ public class LaunchActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        startService(new Intent(this, MyService.class));
+        Log.d("myLogs","destroy");
+        News[] ar = new News[mainFragment.adapter.mValues.size()];
+        News[] array = mainFragment.adapter.mValues.toArray(ar);
+        Intent intent = new Intent(this, MyService.class);
+        intent.putExtra("newsArray", array);
+        startService(intent);
     }
 }

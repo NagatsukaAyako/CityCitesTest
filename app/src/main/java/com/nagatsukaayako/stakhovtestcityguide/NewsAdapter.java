@@ -24,7 +24,7 @@ import java.util.List;
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
 
-    private List<News> mValues;
+    public List<News> mValues;
     private final OnListFragmentInteractionListener mListener;
 
     public void setData(List<News> newNews){
@@ -35,7 +35,6 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     public NewsAdapter(List<News> items, OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
-//        new GetJSON(this, null).execute();
     }
 
     @Override
@@ -79,9 +78,8 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
                 holder.mImageView.setImageBitmap(image);
             }
         }).execute(mValues.get(position).getNewsIcons());
-        Log.d("City Cites", mValues.get(position).getNewsIcons());
         holder.mName.setText(mValues.get(position).getName());
-        holder.mDate.setText(new SimpleDateFormat("d.MM.yyyy HH:mm", new Locale("ua-UK")).format(mValues.get(position).getDateShowUNIX()));
+        holder.mDate.setText(new SimpleDateFormat("d.MM.yyyy HH:mm", Locale.getDefault()).format(mValues.get(position).getDateShowUNIX()));
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

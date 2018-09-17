@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class NewsFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
     private OnListFragmentInteractionListener mListener;
-    private NewsAdapter adapter;
+    public NewsAdapter adapter;
     private SwipeRefreshLayout refreshLayout;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,

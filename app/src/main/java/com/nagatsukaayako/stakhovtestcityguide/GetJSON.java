@@ -16,14 +16,21 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 
 class GetJSON extends AsyncTask<String,String,String>{
     private NewsAdapter mAdapter;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private List<News> list;
+    private SendNotificationListener listener;
     GetJSON(NewsAdapter adapter, SwipeRefreshLayout swipeRefreshLayout){
         mAdapter = adapter;
         this.swipeRefreshLayout = swipeRefreshLayout;
 
+    }
+    GetJSON(List<News> list, SendNotificationListener listener){
+        this.list = list;
+        this.listener =listener;
     }
     @Override
     protected String doInBackground(String... strings) {
@@ -78,7 +85,22 @@ class GetJSON extends AsyncTask<String,String,String>{
                             newsArrayList.add(new News((JSONObject) news.get(i)));
                         }
                         News.sortNews(newsArrayList);
-                        mAdapter.setData(newsArrayList);
+                        if(mAdapter != null)
+                            mAdapter.setData(newsArrayList);
+                        if(list!=null){
+                            for (News n: newsArrayList ) {
+                                boolean isConsist = false;
+                                for (News news1: list) {
+                                    if(n.getNewsUrl().equals(news1.getNewsUrl()))
+                                    {
+                                        isConsist = true;
+                                        break;
+                                    }
+                                }
+                                if(!isConsist)
+                                    listener.sendNotification(n.getName(), n.getTxt());
+                            }
+                        }
                     }
                 }
                 catch (JSONException e){
