@@ -24,6 +24,10 @@
         <activity
             android:name=".NewsDetailActivity"
             android:label="@string/title_activity_main"/>
+        <service
+            android:name=".MyService"
+            android:enabled="true"
+            android:exported="false"/>
     </application>
 
 </manifest>

@@ -1,5 +1,6 @@
 package com.nagatsukaayako.stakhovtestcityguide;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -19,6 +20,7 @@ public class LaunchActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        stopService(new Intent(this, MyService.class));
         LinearLayout linearLayout = new LinearLayout(this);
         linearLayout.setOrientation(LinearLayout.VERTICAL);
         final FrameLayout mainFrame = new FrameLayout(this);
@@ -49,5 +51,11 @@ public class LaunchActivity extends AppCompatActivity {
         linearLayout.addView(mainFrame, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0, 1));
         linearLayout.addView(navigation, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
         setContentView(linearLayout);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        startService(new Intent(this, MyService.class));
     }
 }

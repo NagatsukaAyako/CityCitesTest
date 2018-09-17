@@ -2,6 +2,7 @@ package com.nagatsukaayako.stakhovtestcityguide;
 
 
 import android.os.AsyncTask;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -16,10 +17,13 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class GetJSON extends AsyncTask<String,String,String>{
+class GetJSON extends AsyncTask<String,String,String>{
     private NewsAdapter mAdapter;
-    public GetJSON(NewsAdapter adapter){
+    private SwipeRefreshLayout swipeRefreshLayout;
+    GetJSON(NewsAdapter adapter, SwipeRefreshLayout swipeRefreshLayout){
         mAdapter = adapter;
+        this.swipeRefreshLayout = swipeRefreshLayout;
+
     }
     @Override
     protected String doInBackground(String... strings) {
@@ -52,6 +56,7 @@ public class GetJSON extends AsyncTask<String,String,String>{
                 e.printStackTrace();
             }
         }
+        Log.d("City Cites", String.valueOf(swipeRefreshLayout==null));
         return null;
     }
 
@@ -80,6 +85,10 @@ public class GetJSON extends AsyncTask<String,String,String>{
                     Log.d("City Cites", e.getMessage());
                 }
             }
+        }
+
+        if(swipeRefreshLayout!=null){
+            swipeRefreshLayout.setRefreshing(false);
         }
     }
 }

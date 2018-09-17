@@ -35,7 +35,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     public NewsAdapter(List<News> items, OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
-        new GetJSON(this).execute();
+//        new GetJSON(this, null).execute();
     }
 
     @Override
