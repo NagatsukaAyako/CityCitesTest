@@ -1,43 +1,16 @@
 package com.nagatsukaayako.stakhovtestcityguide;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.IntentService;
-import android.app.Notification;
-import android.app.PendingIntent;
-import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentSender;
-import android.content.SharedPreferences;
-import android.os.CountDownTimer;
-import android.os.Handler;
 import android.os.IBinder;
-import android.os.Looper;
-import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import android.util.Log;
-import android.view.View;
-import android.webkit.MimeTypeMap;
-import android.widget.Toast;
 
-
-import java.io.BufferedReader;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.URL;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Locale;
-import java.util.Properties;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -72,7 +45,7 @@ public class MyService extends IntentService {
         Log.d(LOG_TAG, "onHandleIntent");
         List<News> list = Arrays.asList((News[])intent.getExtras().get("newsArray"));
         Timer timer = new Timer();
-        timer.schedule(new MyTimerTask(getApplicationContext(), list), 10000,10000);
+        timer.schedule(new MyTimerTask(getApplicationContext(), list), Settings.getInstance().backgroundTime,Settings.getInstance().backgroundTime);
     }
 }
 class MyTimerTask extends TimerTask {

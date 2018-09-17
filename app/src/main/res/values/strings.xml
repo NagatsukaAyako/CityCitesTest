@@ -2,4 +2,7 @@
     <string name="app_name">Stakhov Test City Guide</string>
     <string name="title_activity_launch">Stakhov Test City Guide</string>
     <string name="title_activity_main">Подробно</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

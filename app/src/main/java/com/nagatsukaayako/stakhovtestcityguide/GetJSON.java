@@ -97,7 +97,7 @@ class GetJSON extends AsyncTask<String,String,String>{
                                         break;
                                     }
                                 }
-                                if(!isConsist)
+                                if(!isConsist && Settings.getInstance().isNotificate)
                                     listener.sendNotification(n.getName(), n.getTxt());
                             }
                         }

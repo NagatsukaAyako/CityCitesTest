@@ -11,12 +11,6 @@ import android.widget.TextView;
 
 public class AboutFragment extends Fragment {
 
-
-    public AboutFragment() {
-        // Required empty public constructor
-    }
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
